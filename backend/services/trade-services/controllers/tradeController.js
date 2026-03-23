@@ -25,8 +25,18 @@ exports.createTrade = async (req, res)=>{
 exports.getTrades = async (req, res) => {
     try{
         const userId = req.user.id;
-
-        const trades = await Trade.find({userId}).sort({createdAt : -1});
+        const {from , to } = req.query;
+        let filter = {userId};
+        if(from || to){
+            filter.createdAt = {};
+            if(from){
+                filter.createdAt.$gte = new Date(from);
+            }
+            if(to){
+                filter.createdAt.$lte = new Date(to);
+            }
+        }
+        const trades = await Trade.find(filter).sort({createdAt : -1});
         res.json({
             trades
         });
