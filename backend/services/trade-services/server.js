@@ -19,7 +19,7 @@ app.use('/api/trades', tradeRoutes);
 
 const PORT = process.env.PORT || 5002;
 
-exports.module = app;
+module.exports = app;
 if(require.main === module){
     app.listen(PORT, ()=>{
         console.log(`Server for trade-service is running on port ${PORT}`);
