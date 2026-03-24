@@ -9,6 +9,9 @@ app.use('/api/ai',aiRoutes);
 
 const PORT = process.env.PORT || 5003;
 
-app.listen(PORT, ()=>{
-    console.log(`AI service is running on Port ${PORT}`);
-});
+module.exports = app;
+if (require.main === module){
+    app.listen(PORT, ()=>{
+        console.log(`AI service is running on Port ${PORT}`);
+    });
+}

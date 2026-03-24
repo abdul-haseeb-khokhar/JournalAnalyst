@@ -18,6 +18,10 @@ app.get("/",(req, res) =>{
 app.use('/api/trades', tradeRoutes);
 
 const PORT = process.env.PORT || 5002;
-app.listen(PORT, ()=>{
-    console.log(`Server for trade-service is running on port ${PORT}`);
-});
+
+exports.module = app;
+if(require.main === module){
+    app.listen(PORT, ()=>{
+        console.log(`Server for trade-service is running on port ${PORT}`);
+    });
+}
