@@ -6,7 +6,9 @@ const app = express();
 app.use(express.json());
 
 app.use('/api/ai',aiRoutes);
-
+app.get('/',(req, res) =>{
+    res.send("AI service is running")
+});
 const PORT = process.env.PORT || 5003;
 
 module.exports = app;
