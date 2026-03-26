@@ -1,8 +1,14 @@
 import { useState } from "react";
 import { loginUser } from "../api/userApi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import  {useAuth} from '../context/AuthContext'
+import {Eye, EyeOff} from "lucide-react";
 
 function Login(){
+    const {login} = useAuth()
+    const navigate = useNavigate()
+    
+    const [showPassword, setShowPassword] = useState(false)
     const [formData, setFormData] = useState({email: '',password: ''})
     const [error, setError] = useState('')
 
@@ -14,7 +20,8 @@ function Login(){
         e.preventDefault()
         try{
             const res = await loginUser(formData)
-            console.log(res.data)
+            login(res.data.token)
+            navigate('/dashboard')
         }catch(err){
             setError(err.response?.data?.message || 'Login Failed')
         }
@@ -32,8 +39,14 @@ function Login(){
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <input type="email" name="email" placeholder="Enter Email . . ." onChange={handleChange}
                     className="bg-gray-800 text-white placeholder-gray-500 px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-blue-500" />
-                    <input type="password" name="password" placeholder="Enter Password . . ." onChange={handleChange}
-                    className="bg-gray-800 text-white placeholder-gray-500 px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 " />
+                    <div className="relative">
+                        <input type={showPassword ? "text" : "password"} name="password" placeholder="Enter Password . . ." onChange={handleChange} autoComplete="current-password"
+                        className="bg-gray-800 text-white placeholder-gray-500 px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 pr-12"
+                        />
+                        <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition">
+                            {showPassword ? <EyeOff size={20}/> : <Eye size={20}/>}
+                        </button>
+                    </div>
                     <button type="submit"
                     className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition duration-200">
                         Login
