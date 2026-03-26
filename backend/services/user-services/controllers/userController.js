@@ -37,7 +37,6 @@ exports.login = async (req, res) => {
             process.env.JWT_SECRET,
             {expiresIn: "7d"}
         );
-
         res.json({
             message: "Login Successful",
             token
@@ -55,6 +54,7 @@ exports.getProfile = async (req, res) => {
         if(!user){
             return res.status(404).json({message: "User not found"});
         }
+        
         res.json({
             user
         });
