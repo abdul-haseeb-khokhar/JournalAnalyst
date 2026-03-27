@@ -3,8 +3,15 @@ require('dotenv').config();
 const app = express();
 const mongoose =require('mongoose');
 const tradeRoutes= require('./routes/tradeRoutes');
+const cors = require('cors')
 
 app.use(express.json());
+app.use(cors({
+    origin: ["http://localhost:5173", "https://journal-analyst-trade-service.vercel.app"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials:true
+}));
 
 mongoose.connect(process.env.MONGO_URI)
 .then(()=> console.log("Trade DB connected"))
