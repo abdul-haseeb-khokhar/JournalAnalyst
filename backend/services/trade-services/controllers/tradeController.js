@@ -21,8 +21,20 @@ exports.createTrade = async (req, res)=>{
         });
     }
 };
-
-exports.getTrades = async (req, res) => {
+exports.getAllTrades = async (req, res) =>{
+    try{
+        const userId = req.user.id;
+        const trades = await Trade.find({userId}).sort({createdAt : -1});
+        res.json({
+            trades
+        })
+    }catch(error){
+        res.status(500).json({
+            message: error.message
+        })
+    }
+};
+exports.getCustomizedTrades = async (req, res) => {
     try{
         const userId = req.user.id;
         const {from , to } = req.query;
@@ -36,9 +48,9 @@ exports.getTrades = async (req, res) => {
                 filter.createdAt.$lte = new Date(to);
             }
         }
-        const trades = await Trade.find(filter).sort({createdAt : -1});
+        const customizedTrades = await Trade.find(filter).sort({createdAt : -1});
         res.json({
-            trades
+            customizedTrades
         });
     }catch (error){
         res.status(500).json({
