@@ -13,7 +13,7 @@ exports.analyze = async (req, res)=>{
         }
 
         const response = await axios.get(
-            `${process.env.TRADE_SERVICE_URL}/api/trades/records${query}`,
+            `${process.env.TRADE_SERVICE_URL}/api/trades/customized-records${query}`,
             {
                 headers:{authorization: token},
             }
