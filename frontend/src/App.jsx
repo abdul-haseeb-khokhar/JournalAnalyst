@@ -1,16 +1,30 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Login  from './pages/login'
 import Register from './pages/Register'
+import Dashboard from './pages/Dashboard'
+import ProtectedRoute from './components/ProtectedRoute'
 function App(){
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<div>Home</div>}/>
+        <Route path='/' element={<Navigate to="/login"/>}/>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />}/>
-        <Route path='/dashboard' element={<div>Dashboard</div>}/>
-        <Route path='/trades' element={<div>Trades</div>}/>
-        <Route path='/ai-insights' element={<div>AI Insights</div>}/>
+        <Route path='/dashboard' element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }/>
+        <Route path='/trades' element={
+          <ProtectedRoute>
+            <div>Trades</div>
+          </ProtectedRoute>
+        }/>
+        <Route path='/ai-insights' element={
+          <ProtectedRoute>
+            <div>AI Insights</div>
+          </ProtectedRoute>
+          }/>
       </Routes>
     </BrowserRouter>
   )
