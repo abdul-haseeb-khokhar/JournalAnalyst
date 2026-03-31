@@ -64,7 +64,7 @@ exports.getCustomizedTrades = async (req, res) => {
             const userId = req.user.id;
             const updateData = req.body;
 
-            const trade = await Trade.findOne(tradeId);
+            const trade = await Trade.findById(tradeId);
             if(!trade){
                 return res.status(404).json({
                    success: false,
