@@ -5,7 +5,6 @@ import { getAllTrades, getTradesByDate } from '../api/tradeApi'
 import { Divide } from "lucide-react";
 
 function Dashboard() {
-    console.log ("Dashboard page mounted")
     const { token } = useAuth()
     const [trades, setTrades] = useState([])
     const [loading, setLoading] = useState(true)
@@ -22,7 +21,7 @@ function Dashboard() {
         setFiltered(false)
         try {
             const res = await getAllTrades(token)
-            console.log(res.data)
+            console.log(token)
             setTrades(res.data)
         } catch (error) {
             console.error(error)
