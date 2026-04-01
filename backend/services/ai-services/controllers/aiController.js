@@ -6,10 +6,9 @@ exports.analyze = async (req, res)=>{
     try{
         const token = req.headers.authorization;
         const {from, to} = req.query;
-
         let query = "";
         if(from && to){
-            query=`?from=${from}&to${to}`;
+            query=`?from=${from}&to=${to}`;
         }
 
         const response = await axios.get(
@@ -18,7 +17,7 @@ exports.analyze = async (req, res)=>{
                 headers:{authorization: token},
             }
         );
-        const trades = response.data.trades;
+        const trades = response.data;
         if(!trades || trades.length ===0){
             return res.status(200).json({
                 message: "No trades found"
