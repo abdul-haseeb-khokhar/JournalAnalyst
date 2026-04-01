@@ -6,7 +6,7 @@ const authMiddleware  = require('../utils/authMiddleware');
 
 router.post('/create', authMiddleware, createTrade);
 router.get('/records', authMiddleware, getAllTrades);
-router.get('/cutomized-records', authMiddleware, getCustomizedTrades);
+router.get('/customized-records', authMiddleware, getCustomizedTrades);
 router.put('/edit/:tradeId', authMiddleware, editTrade);
 router.delete('/delete/:tradeId', authMiddleware, deleteTrade);
 
