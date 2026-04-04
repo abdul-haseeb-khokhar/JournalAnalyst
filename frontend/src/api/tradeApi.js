@@ -8,7 +8,7 @@ export const getAllTrades = (token) => tradeApi.get('/api/trades/records',{
     headers: {Authorization: `Bearer ${token}`}
 })
 
-export const getTradesByDate = (token, from, to) => tradeApi.get(`/api/trades/cutomized-records?from=${from}&to=${to}`,{
+export const getTradesByDate = (token, from, to) => tradeApi.get(`/api/trades/customized-records?from=${from}&to=${to}`,{
     headers:{Authorization: `Bearer ${token}`}
 })
 

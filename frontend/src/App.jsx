@@ -3,6 +3,7 @@ import Login  from './pages/login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
 import Trades from './pages/Trades'
+import AiInsights from './pages/AIInsights'
 import ProtectedRoute from './components/ProtectedRoute'
 function App(){
   return (
@@ -23,7 +24,7 @@ function App(){
         }/>
         <Route path='/ai-insights' element={
           <ProtectedRoute>
-            <div>AI Insights</div>
+            <div><AiInsights/></div>
           </ProtectedRoute>
           }/>
       </Routes>
