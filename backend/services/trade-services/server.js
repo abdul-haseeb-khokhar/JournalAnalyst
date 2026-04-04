@@ -7,7 +7,7 @@ const cors = require('cors')
 
 app.use(express.json());
 app.use(cors({
-    origin: ["https://journal-analyst-five.vercel.app/", "https://journal-analyst-trade-service.vercel.app"],
+    origin: ["https://journal-analyst-five.vercel.app", "https://journal-analyst-trade-service.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials:true
