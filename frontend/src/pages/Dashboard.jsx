@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Navbar from "../components/common/Navbar";
 import { useAuth } from "../context/AuthContext";
 import { getAllTrades, getTradesByDate } from '../api/tradeApi'
-import { Divide } from "lucide-react";
 
 function Dashboard() {
     const { token } = useAuth()
