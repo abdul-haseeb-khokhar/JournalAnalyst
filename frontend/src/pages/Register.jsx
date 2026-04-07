@@ -71,7 +71,7 @@ function Register() {
                             type={showPassword ? "text" : "password"}
                             placeholder="Password"
                             onChange={handleChange}
-                            className="bg-gray-800 text-white placeholder-gray-500 px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 pr-12"
+                            className="w-full bg-gray-800 text-white placeholder-gray-500 px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 pr-12"
                         />
                         <button type="button" onClick={() => setShowPassword(!showPassword)}
                             className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition cursor-pointer">
@@ -84,7 +84,7 @@ function Register() {
                             type={showCoPassword ? 'text' : 'password'}
                             placeholder="Confirm Password"
                             onChange={handleChange}
-                            className="bg-gray-800 text-white placeholder-gray-500 px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 pr-12"
+                            className="w-full bg-gray-800 text-white placeholder-gray-500 px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 pr-12"
                         />
                         <button type="button" onClick={() => setShowCoPassword(!showCoPassword)}
                             className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition cursor-pointer">

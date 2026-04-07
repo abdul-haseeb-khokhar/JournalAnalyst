@@ -56,7 +56,7 @@ function Login() {
                         className="bg-gray-800 text-white placeholder-gray-500 px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-blue-500" />
                     <div className="relative">
                         <input type={showPassword ? "text" : "password"} name="password" placeholder="Enter Password . . ." onChange={handleChange} autoComplete="current-password"
-                            className="bg-gray-800 text-white placeholder-gray-500 px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 pr-12"
+                            className="bg-gray-800 text-white placeholder-gray-500 px-4 py-3 w-full rounded-xl outline-none focus:ring-2 focus:ring-blue-500 pr-12"
                         />
                         <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition cursor-pointer">
                             {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
