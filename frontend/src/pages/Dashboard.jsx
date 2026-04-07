@@ -21,7 +21,6 @@ function Dashboard() {
         setFiltered(false)
         try {
             const res = await getAllTrades(token)
-            console.log(token)
             setTrades(res.data)
         } catch (error) {
             console.error(error)

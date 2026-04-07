@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard'
 import Trades from './pages/Trades'
 import AiInsights from './pages/AIInsights'
 import ProtectedRoute from './components/ProtectedRoute'
+import AuthSuccess from './pages/AuthSuccess'
 function App(){
   return (
     <BrowserRouter>
@@ -12,6 +13,7 @@ function App(){
         <Route path='/' element={<Navigate to="/login"/>}/>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />}/>
+        <Route path='/auth/success' element={<AuthSuccess />} />
         <Route path='/dashboard' element={
           <ProtectedRoute>
             <Dashboard />
