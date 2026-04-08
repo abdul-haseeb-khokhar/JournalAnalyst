@@ -67,10 +67,10 @@ function Login() {
                             {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                         </button>
                     </div>
-                    <button type="submit" className="bg-blue-600 hover:bg-blue-800 text-white font-semibold py-3 rounded-xl transition duration-200 cursor-pointer">
+                    <button type="submit" disabled={lgn_loading} className="bg-blue-600 hover:bg-blue-800 text-white font-semibold py-3 rounded-xl transition duration-200 cursor-pointer">
                         {lgn_loading ? (
                             <div className="flex items-center justify-center">
-                                <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                                <div className="w-5 h-2 border-4 border-white rounded-full animate-ping"></div>
                             </div>
                         ) : (
                             <p>Login</p>

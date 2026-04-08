@@ -106,7 +106,7 @@ function Register() {
                         className="bg-blue-600 hover:bg-blue-800 text-white font-semibold py-3 rounded-xl transition duration-200 cursor-pointer">
                         {reg_loading ? (
                             <div className="flex items-center justify-center">
-                                <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                                <div className="w-5 h-2 border-4 border-white rounded-full animate-ping"></div>
                             </div>
                         ) : (
                             <p>Register</p>
