@@ -1,14 +1,17 @@
 import { useState } from "react";
 import {useAuth} from '../context/AuthContext';
 import { analyzeTrades } from "../api/aiApi";
-
+import { useMutation } from "@tanstack/react-query";
 function useAiInsights(){
     const {token} = useAuth();
     const [from, setFrom] = useState('');
     const [to , setTo] = useState('');
-    const [analysis, setAnalysis] = useState('');
-    const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+
+    const {mutate: analayze, data: analysis, isPending: loading} = useMutation({
+        mutationFn: ()=> analyzeTrades(token, from, to).then(res => res.data.analysis || res.data.message),
+        onError: (err) => setError(err.response?.data?.message || 'Failed to analyze trades')
+    })
 
     const handleAnalyze = async() => {
         if(!from || !to){
@@ -16,16 +19,7 @@ function useAiInsights(){
             return;
         }
         setError('')
-        setLoading(true)
-        setAnalysis('')
-        try{
-            const res = await analyzeTrades(token, from , to)
-            setAnalysis(res.data.analysis || res.data.message);
-        }catch(err){
-            setError(err.response?.data?.message || 'Failed to analyze trades')
-        }finally{
-            setLoading(false)
-        }
+        analayze()
     }
 
     return { from, setFrom, to, setTo, analysis, loading, error, handleAnalyze };
