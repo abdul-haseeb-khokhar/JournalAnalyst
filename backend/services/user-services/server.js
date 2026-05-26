@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes');
 const cors = require('cors')
 
+const dns = require('node:dns').promises
+dns.setServers(['1.1.1.1','1.0.0.1'])
+
+
 const app = express();
 app.use(express.json());
 app.use(cors({

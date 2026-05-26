@@ -77,10 +77,10 @@ exports.getCustomizedTrades = async (req, res) => {
                     message: "Unauthorized"
                 });
             }
-            
+            const {_id, ...safeUpdateData} = updateData;
             const updateTrade = await Trade.findByIdAndUpdate(
                 tradeId,
-                updateData,
+                safeUpdateData,
                 {new: true, runValidators: true}
             );
 

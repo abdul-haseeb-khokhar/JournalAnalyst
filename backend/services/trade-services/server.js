@@ -5,6 +5,9 @@ const mongoose =require('mongoose');
 const tradeRoutes= require('./routes/tradeRoutes');
 const cors = require('cors')
 
+const dns = require('node:dns').promises
+dns.setServers(['1.1.1.1','1.0.0.1'])
+
 app.use(express.json());
 app.use(cors({
     origin: ["https://journal-analyst-five.vercel.app", "http://localhost:5173"],
