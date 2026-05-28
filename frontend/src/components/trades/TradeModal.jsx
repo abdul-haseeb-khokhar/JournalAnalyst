@@ -1,4 +1,4 @@
-function TradeModal({ showModal, setShowModal, formData, editId, error, handleChange, handleSubmit }) {
+function TradeModal({ showModal, setShowModal, formData, editId, error, handleChange, handleSubmit, submitLoading }) {
     if (!showModal) return null
 
     return (
@@ -64,11 +64,14 @@ function TradeModal({ showModal, setShowModal, formData, editId, error, handleCh
 
                 <div className="flex gap-3 mt-6">
                     <button onClick={handleSubmit}
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold transition">
-                        {editId ? 'Update' : 'Add Trade'}
+                    disabled={submitLoading}
+                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold transition cursor-pointer">
+                        {submitLoading ? (
+                            <div className="w-5 h-2 border-4 border-white rounded-full animate-ping mx-auto"></div>
+                        ) : editId ? 'Update' : 'Add Trade'}
                     </button>
                     <button onClick={() => setShowModal(false)}
-                        className="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-xl font-semibold transition">
+                        className="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-xl font-semibold transition cursor-pointer">
                             Cancel
                         </button>
                 </div>

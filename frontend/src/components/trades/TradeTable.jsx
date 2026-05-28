@@ -36,13 +36,13 @@ function TradeTable({ trades, openEditModal, handleDelete }) {
                                 <div className="flex gap-2">
                                     <button
                                         onClick={() => openEditModal(trade)}
-                                        className="bg-blue-500/20 hover:bg-blue-500/40 text-blue-400 text-xs px-3 py-1 rounded-lg transition"
+                                        className="bg-blue-500/20 hover:bg-blue-500/40 text-blue-400 text-xs px-3 py-1 rounded-lg transition cursor-pointer"
                                     >
                                         Edit
                                     </button>
                                     <button
                                         onClick={() => handleDelete(trade._id)}
-                                        className="bg-red-500/20 hover:bg-red-500/40 text-red-400 text-xs px-3 py-1 rounded-lg transition"
+                                        className="bg-red-500/20 hover:bg-red-500/40 text-red-400 text-xs px-3 py-1 rounded-lg transition cursor-pointer"
                                     >
                                         Delete
                                     </button>

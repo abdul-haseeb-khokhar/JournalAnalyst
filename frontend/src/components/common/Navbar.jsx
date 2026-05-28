@@ -25,7 +25,7 @@ function Navbar() {
                     <Link to="/trades" className="text-gray-400 hover:text-white transition">Trades</Link>
                     <Link to="/ai-insights" className="text-gray-400 hover:text-white transition">AI Insights</Link>
                     <button onClick={handleLogout}
-                        className="bg-red-600 hover:bg-red-700 text-white text-sm px-4 py-2 rounded-xl transition">Logout</button>
+                        className="bg-red-600 hover:bg-red-700 text-white text-sm px-4 py-2 rounded-xl transition cursor-pointer">Logout</button>
                 </div>
 
                 <button className="sm:hidden text-white" onClick={() => setIsOpen(!isOpen)}>

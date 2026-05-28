@@ -1,22 +1,22 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
-import {useQuery, useMutation, useQueryClient} from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { getAllTrades, createTrade, updateTrade, deleteTrade } from '../api/tradeApi'
 import { data } from 'react-router-dom'
 
-const emptyForm ={
+const emptyForm = {
     pair: '',
     position: 'buy',
     entryPrice: '',
     exitPrice: '',
     quantity: '',
-    prfitLoss: '',
+    profitLoss: '',
     strategy: '',
     notes: ''
 }
 
-function useTrades(){
-    const {token} =useAuth()
+function useTrades() {
+    const { token } = useAuth()
     const queryClient = useQueryClient()
 
     const [showModal, setShowModal] = useState(false)
@@ -24,34 +24,38 @@ function useTrades(){
     const [editId, setEditId] = useState(null)
     const [error, setError] = useState('')
 
-    const {data: trades=[], isloading: loading} =useQuery({
+
+    const { data: trades = [], isLoading: loading } = useQuery({
         queryKey: ['trades'],
-        queryFn: () => getAllTrades(token).then(res=> res.data)
+        queryFn: () => getAllTrades(token).then(res => res.data)
     })
 
     const invalidateTrades = () => {
-        queryClient.invalidateQueries({queryKey: ['trades']})
+        queryClient.invalidateQueries({ queryKey: ['trades'] })
     }
 
     const createMutation = useMutation({
         mutationFn: (data) => createTrade(token, data),
-        onSuccess: ()=> {setShowModal(false); invalidateTrades()},
+        onSuccess: () => { setShowModal(false); invalidateTrades() },
         onError: (error) => setError(error.response?.data?.message || 'Error submitting trade')
     })
 
     const updateMutation = useMutation({
-        mutationFn: (data) => updateTrade(token, data),
-        onSuccess: () => {setShowModal(false); invalidateTrades()},
+        mutationFn: (data) => updateTrade(token, editId, data),
+        onSuccess: () => { setShowModal(false); invalidateTrades() },
         onError: (err) => setError(err.response?.data?.message || 'Error submitting trade')
     })
+
 
     const deleteMutation = useMutation({
         mutationFn: (id) => deleteTrade(token, id),
         onSuccess: () => invalidateTrades(),
         onError: (err) => console.error(err)
     })
+
+    const submitLoading = createMutation.isPending || updateMutation.isPending
     const handleChange = (e) => {
-        setFormData({...formData, [e.target.name]: e.target.value})
+        setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
     const openAddModal = () => {
@@ -78,20 +82,23 @@ function useTrades(){
     }
 
     const handleSubmit = async () => {
-            if(editId){
-                updateMutation.mutate(formData)
-            } else {
-                createMutation.mutate(formData)
-            }
+        console.log('createMutation.isPending:', createMutation.isPending)
+        console.log('updateMutation.isPending:', updateMutation.isPending)
+        console.log('submitLoading:', submitLoading)
+        if (editId) {
+            updateMutation.mutate(formData)
+        } else {
+            createMutation.mutate(formData)
+        }
     }
 
     const handleDelete = async (id) => {
-        if(!window.confirm('Are you sure you want to delete this trade?')) return
+        if (!window.confirm('Are you sure you want to delete this trade?')) return
         deleteMutation.mutate(id)
     }
 
-    return{
-        trades, loading, showModal, formData, error, setShowModal, editId,
+    return {
+        trades, loading, showModal, formData, error, setShowModal, editId, submitLoading,
         handleChange, openAddModal, openEditModal, handleSubmit, handleDelete
     }
 }
